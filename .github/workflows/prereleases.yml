@@ -1,0 +1,23 @@
+name: pre-releases
+on:
+    push:
+        branches:
+            - "github_actions"
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   run: mkdir dist
+            -   run: pip install -r requirements.txt
+            -   run: python3 -m catparser --schema symbol/all.cats --include symbol --output  dist/symbol.yml
+            -   run: python3 -m catparser --schema nem/all.cats --include nem --output  dist/nem.yml
+            -   uses: "marvinpinto/action-automatic-releases@latest"
+                with:
+                    repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                    automatic_release_tag: "latest"
+                    prerelease: true
+                    title: "Development Build"
+                    files: |
+                        dist/symbol.yml
+                        dist/nem.yml
