@@ -1,4 +1,4 @@
-import "transaction.cats"
+    import "transaction.cats"
 
 # binary layout for a transfer transaction
 struct TransferTransactionBody

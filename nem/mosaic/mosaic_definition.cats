@@ -28,6 +28,10 @@ struct MosaicLevy
 # binary layout for a mosaic property
 # supported property names are: divisibility, initialSupply, supplyMutable, transferable
 struct MosaicProperty
+
+    # the size of the mosaic definition object
+	inline ExclusiveSizePrefixedEntity
+
 	# [__value__] property name
 	#
 	# [size] property name size
@@ -40,6 +44,10 @@ struct MosaicProperty
 
 # binary layout for a mosaic definition
 struct MosaicDefinition
+
+    # the size of the mosaic definition object
+	# inline ExclusiveSizePrefixedEntity
+
 	# public key of the mosaic definition owner
 
 	# [__value__] owner public key
@@ -73,6 +81,9 @@ struct MosaicDefinitionTransaction
 	TRANSACTION_TYPE = make_const(TransactionType, MOSAIC_DEFINITION)
 
 	inline Transaction
+
+	# mosaic definition size
+	mosaic_definition_outer_size = make_reserved(int32, 0)
 
 	# mosaic definition
 	mosaic_definition = MosaicDefinition

@@ -10,6 +10,10 @@ enum MultisigAccountModificationType : uint32
 
 # binary layout for a multisig account modification
 struct MultisigAccountModification
+
+	# size of multisig modification
+	multisig_modification_size = make_reserved(int32, 40)
+
 	# modification type
 	modification_type = MultisigAccountModificationType
 

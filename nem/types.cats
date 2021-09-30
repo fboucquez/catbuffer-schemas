@@ -46,3 +46,8 @@ inline struct SizePrefixedString
 
 	# string value
 	__value__ = array(int8, size)
+
+# binary layout for a size-prefixed entity
+struct ExclusiveSizePrefixedEntity
+	# exclusive entity size
+	size = uint32

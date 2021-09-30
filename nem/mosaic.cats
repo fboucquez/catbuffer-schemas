@@ -9,6 +9,9 @@ struct NamespaceId
 
 # binary layout for a mosaic id
 struct MosaicId
+    # the size of the mosaic id object
+	inline ExclusiveSizePrefixedEntity
+
 	# namespace id
 	namespace_id = NamespaceId
 
@@ -19,6 +22,9 @@ struct MosaicId
 
 # binary layout for a mosaic
 struct Mosaic
+    # the size of the mosaic object
+	inline ExclusiveSizePrefixedEntity
+
 	# mosaic id
 	mosaic_id = MosaicId
 

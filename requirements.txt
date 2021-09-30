@@ -1,2 +1,2 @@
-catparser==2.0.1
+catparser==2.0.2
 PyYAML==5.4.1
