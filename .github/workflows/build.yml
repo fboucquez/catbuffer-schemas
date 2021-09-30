@@ -1,0 +1,25 @@
+name: build
+on: [ push ]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   run: mkdir dist
+            -   run: pip install -r requirements.txt
+            -   name: Build symbol.yml
+                run: python3 -m catparser --schema symbol/all.cats --include symbol --output  dist/symbol.yml
+            -   name: Build nem.yml
+                run: python3 -m catparser --schema nem/all.cats --include nem --output  dist/nem.yml
+            -   run: ls -la dist
+            -   uses: "marvinpinto/action-automatic-releases@latest"
+                name: Publish Pre Release
+                if: github.ref == 'refs/heads/main'
+                with:
+                    repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                    automatic_release_tag: "alpha"
+                    prerelease: true
+                    title: "Alpha Build"
+                    files: |
+                        dist/symbol.yml
+                        dist/nem.yml
